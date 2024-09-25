@@ -1,0 +1,844 @@
+[
+    {
+        "verb": "achainigh",
+        "future_root": "achain",
+        "class": 2,
+        "width": "s",
+        "definition": "request"
+    },
+    {
+        "verb": "achoimrigh",
+        "future_root": "achoimr",
+        "class": 2,
+        "width": "s",
+        "definition": "[vt] summarize; recapitulate"
+    },
+    {
+        "verb": "achomharc",
+        "future_root": "achomharc",
+        "class": 1,
+        "width": "b",
+        "definition": "appeal"
+    },
+    {
+        "verb": "achtaigh",
+        "future_root": "acht",
+        "class": 2,
+        "width": "b",
+        "definition": "enact, decree"
+    },
+    {
+        "verb": "aclaigh",
+        "future_root": "acl",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] 1. Limber, exercise. 2. (Of leather, etc.) Flex, soften."
+    },
+    {
+        "verb": "adhain",
+        "future_root": "adhan",
+        "class": 1,
+        "width": "b",
+        "definition": "ignite, kindle"
+    },
+    {
+        "verb": "adhlaic",
+        "future_root": "adhlac",
+        "class": 1,
+        "width": "b",
+        "definition": "bury"
+    },
+    {
+        "verb": "adhair",
+        "future_root": "adhr",
+        "class": 1,
+        "width": "b",
+        "definition": "adore, worship"
+    },
+    {
+        "verb": "admhaigh",
+        "future_root": "admh",
+        "class": 2,
+        "width": "b",
+        "definition": "1. acknowledge. 2. confess."
+    },
+    {
+        "verb": "agaill",
+        "future_root": "agall",
+        "class": 1,
+        "width": "b",
+        "definition": "address, speak to"
+    },
+    {
+        "verb": "agóid",
+        "future_root": "agóid",
+        "class": 1,
+        "width": "s",
+        "definition": "protest, object"
+    },
+    {
+        "verb": "agair",
+        "future_root": "agr",
+        "class": 2,
+        "width": "b",
+        "definition": "avenge, plead"
+    },
+    {
+        "verb": "aibhsigh",
+        "future_root": "aibhs",
+        "class": 2,
+        "width": "s",
+        "definition": "[vt] 1. enlarge (on); emphasize. 2. heighten (color)"
+    },
+    {
+        "verb": "aigéadaigh",
+        "future_root": "aigéad",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] Acidify."
+    },
+    {
+        "verb": "aigleáil",
+        "future_root": "aigleál",
+        "impersonal_present": "aigleáiltear",
+        "class": 1,
+        "width": "b",
+        "definition": "[vi] haggle"
+    },
+    {
+        "verb": "aimsigh",
+        "future_root": "aims",
+        "class": 2,
+        "width": "s",
+        "definition": "1. aim. 2. hit. 3. find, locate. 4. attack. 5. tempt."
+    },
+    {
+        "verb": "ainmnigh",
+        "future_root": "ainmn",
+        "class": 2,
+        "width": "s",
+        "definition": "1. name. 2. nominate. 3. specify."
+    },
+    {
+        "verb": "airigh",
+        "future_root": "air",
+        "class": 2,
+        "width": "s",
+        "definition": "hear"
+    },
+    {
+        "verb": "áirigh",
+        "future_root": "áir",
+        "class": 2,
+        "width": "s",
+        "definition": "count"
+    },
+    {
+        "verb": "aisc",
+        "future_root": "aisc",
+        "class": 1,
+        "width": "s",
+        "definition": "ask, seek"
+    },
+    {
+        "verb": "aisig",
+        "future_root": "aiseag",
+        "class": 1,
+        "width": "b",
+        "definition": "1. restore, restitute. 2. vomit"
+    },
+    {
+        "verb": "aiséirigh",
+        "future_root": "aiséir",
+        "class": 2,
+        "width": "s",
+        "definition": "rise again"
+    },
+    {
+        "verb": "aisíoc",
+        "future_root": "aisíoc",
+        "class": 1,
+        "width": "b",
+        "definition": "repay, refund"
+    },
+    {
+        "verb": "áitigh",
+        "future_root": "áit",
+        "class": 2,
+        "width": "s",
+        "definition": "occupy, argue;settle down to"
+    },
+    {
+        "verb": "aitheasc",
+        "future_root": "aitheasc",
+        "class": 1,
+        "width": "b",
+        "definition": "1. address. 2. exhort. 3. apostrophize."
+    },
+    {
+        "verb": "aithin",
+        "future_root": "aithn",
+        "class": 2,
+        "width": "s",
+        "definition": "recognize"
+    },
+    {
+        "verb": "aithris",
+        "future_root": "aithris",
+        "class": 2,
+        "width": "s",
+        "definition": "recite; narrate"
+    },
+    {
+        "verb": "alp",
+        "future_root": "alp",
+        "class": 1,
+        "width": "b",
+        "definition": "1. swallow whole, devoir. 2. grab."
+    },
+    {
+        "verb": "altaigh",
+        "future_root": "alt",
+        "class": 2,
+        "width": "b",
+        "definition": "give thanks (to God for sth.)"
+    },
+    {
+        "verb": "amharc",
+        "future_root": "amharc",
+        "class": 1,
+        "width": "b",
+        "definition": "[U] look"
+    },
+    {
+        "verb": "aoirigh",
+        "future_root": "aoir",
+        "class": 2,
+        "width": "s",
+        "definition": "herd"
+    },
+    {
+        "verb": "aontaigh",
+        "future_root": "aont",
+        "class": 2,
+        "width": "b",
+        "definition": "1. unite. 2. assent, agree. 3. fit. 4. cohabit"
+    },
+    {
+        "verb": "aothaigh",
+        "future_root": "aoth",
+        "class": 2,
+        "width": "b",
+        "definition": "v.i. Pass crisis."
+    },
+    {
+        "verb": "ardaigh",
+        "future_root": "ard",
+        "class": 2,
+        "width": "b",
+        "definition": "raise, elevate, ascend, carry"
+    },
+    {
+        "verb": "ascain",
+        "future_root": "ascn",
+        "class": 2,
+        "width": "b",
+        "definition": "travel, proceed towards, journey"
+    },
+    {
+        "verb": "aistrigh",
+        "future_root": "astr",
+        "class": 2,
+        "width": "s",
+        "definition": "change\naistrigh1, v.t. & i. 1. Move; transfer, translate. Troscán a aistriú, to shift furniture. Duine a aistriú (ó, go), to transfer s.o. (from, to). Airgead, maoin, a aistriú, to transfer money, property. Pobal a aistriú, to transplant people, a population. Easpag a aistriú, to translate a bishop. Cónaí a aistriú, to move house. Tá an ghaoth ag aistriú, the wind is changing. Ná h~ an scéal sin, don’t carry that story (to other ears). 2. (Of figures, music, etc.) Transpose. 3. Journey, travel. ~ liom sa ród, take the road along with me. 4. Ling: Translate. Leabhar a aistriú go Gaeilge, to translate a book into Irish.\n- transfer universities"
+    },
+    {
+        "verb": "asúigh",
+        "future_root": "asú",
+        "class": 1,
+        "width": "b",
+        "definition": "[vt] (adsorb; aspirate)"
+    },
+    {
+        "verb": "at",
+        "future_root": "at",
+        "class": 1,
+        "width": "b",
+        "definition": "swell, bloat"
+    },
+    {
+        "verb": "athnuaigh",
+        "future_root": "athnua",
+        "class": 1,
+        "width": "b",
+        "definition": "renew, refresh"
+    },
+    {
+        "verb": "athraigh",
+        "future_root": "athr",
+        "class": 2,
+        "width": "b",
+        "definition": "1. change, alter. 2. move."
+    },
+    {
+        "verb": "báigh",
+        "future_root": "bá",
+        "class": 1,
+        "width": "b",
+        "definition": "drown"
+    },
+    {
+        "verb": "bac",
+        "future_root": "bac",
+        "class": 1,
+        "width": "b",
+        "definition": "1. balk, hinder. 3. heed."
+    },
+    {
+        "verb": "bácáil",
+        "future_root": "bácál",
+        "class": 1,
+        "width": "b",
+        "definition": "bake"
+    },
+    {
+        "verb": "bagair",
+        "future_root": "bagr",
+        "class": 2,
+        "width": "b",
+        "definition": "1. brandish. 2. beckon. 3. threaten."
+    },
+    {
+        "verb": "bailigh",
+        "future_root": "bail",
+        "class": 2,
+        "width": "s",
+        "definition": "gather, collect"
+    },
+    {
+        "verb": "bain",
+        "future_root": "bain",
+        "class": 1,
+        "width": "s",
+        "definition": "extract, shorten, cut"
+    },
+    {
+        "verb": "baist",
+        "future_root": "baist",
+        "class": 1,
+        "width": "s",
+        "definition": "1. baptize. 2. name. 3. add water to."
+    },
+    {
+        "verb": "báistigh",
+        "future_root": "báist",
+        "class": 2,
+        "width": "s",
+        "definition": "rain"
+    },
+    {
+        "verb": "bailc",
+        "future_root": "balc",
+        "class": 1,
+        "width": "b",
+        "definition": "pour down; press down"
+    },
+    {
+        "verb": "bánaigh",
+        "future_root": "bán",
+        "class": 2,
+        "width": "b",
+        "definition": "1. whiten. 2. bleach. 3. blanch. 4. dawn. 5. empty. 6 lay waste."
+    },
+    {
+        "verb": "barúil",
+        "future_root": "barúil",
+        "class": 1,
+        "width": "b",
+        "definition": "[vi] (think, be of the opinion (that) )"
+    },
+    {
+        "verb": "básaigh",
+        "future_root": "bás",
+        "class": 2,
+        "width": "b",
+        "definition": "1. put to death. 2. die."
+    },
+    {
+        "verb": "basc",
+        "future_root": "basc",
+        "class": 1,
+        "width": "b",
+        "definition": "bash, crush"
+    },
+    {
+        "verb": "baslaigh",
+        "future_root": "basl",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] (baste, beat)\n{†√ baslú [m]}"
+    },
+    {
+        "verb": "beachtaigh",
+        "future_root": "beacht",
+        "class": 2,
+        "width": "b",
+        "definition": "correct. (with ar) criticize."
+    },
+    {
+        "verb": "bealaigh",
+        "future_root": "beal",
+        "class": 2,
+        "width": "b",
+        "definition": "grease"
+    },
+    {
+        "verb": "beannaigh",
+        "future_root": "beann",
+        "class": 2,
+        "width": "b",
+        "definition": "bless"
+    },
+    {
+        "verb": "bearnaigh",
+        "future_root": "bearn",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] (1. breach. 2. broach, tap.)"
+    },
+    {
+        "verb": "bearr",
+        "future_root": "bearr",
+        "class": 1,
+        "width": "b",
+        "definition": "shave"
+    },
+    {
+        "verb": "beartaigh",
+        "future_root": "beart",
+        "class": 2,
+        "width": "b",
+        "definition": "1. (Lit) cast. 2. poise, brandish. 3. plan, contrive."
+    },
+    {
+        "verb": "beathaigh",
+        "future_root": "beath",
+        "class": 2,
+        "width": "b",
+        "definition": "feed, nourish; rear"
+    },
+    {
+        "verb": "béic",
+        "future_root": "béic",
+        "class": 1,
+        "width": "s",
+        "definition": "cry out"
+    },
+    {
+        "verb": "beirigh",
+        "future_root": "beir",
+        "class": 2,
+        "width": "s",
+        "definition": "1. cook by boling. 2. bake."
+    },
+    {
+        "verb": "beoigh",
+        "future_root": "beo",
+        "class": 1,
+        "width": "b",
+        "definition": "animate"
+    },
+    {
+        "verb": "bíog",
+        "future_root": "bíog",
+        "class": 1,
+        "width": "b",
+        "definition": "energize",
+        "verbal_nouns": [
+            "canadh",
+            "canúint"
+        ]
+    },
+    {
+        "verb": "bioraigh",
+        "future_root": "bior",
+        "class": 2,
+        "width": "b",
+        "definition": "1. point, sharpen."
+    },
+    {
+        "verb": "bisigh",
+        "future_root": "bis",
+        "class": 2,
+        "width": "s",
+        "definition": "1. improve. 2. increase, prosper."
+    },
+    {
+        "verb": "bladair",
+        "future_root": "bladr",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] [vi] (1. cajole. 2. adulate, flatter.)"
+    },
+    {
+        "verb": "blais",
+        "future_root": "blais",
+        "class": 1,
+        "width": "s",
+        "definition": "taste"
+    },
+    {
+        "verb": "bláthaigh",
+        "future_root": "bláth",
+        "class": 2,
+        "width": "b",
+        "definition": "blossom, bloom"
+    },
+    {
+        "verb": "bligh",
+        "future_root": "blí",
+        "class": 1,
+        "width": "s",
+        "past_root": "bl",
+        "past_class": 2,
+        "past_width": "s",
+        "definition": "milk"
+    },
+    {
+        "verb": "blosc",
+        "future_root": "blosc",
+        "class": 1,
+        "width": "b",
+        "definition": "Crack, exploded"
+    },
+    {
+        "verb": "bodhraigh",
+        "future_root": "bodhr",
+        "class": 2,
+        "width": "b",
+        "definition": "1. deafen. 2. bother, annoy. 3. deaden."
+    },
+    {
+        "verb": "bog",
+        "future_root": "bog",
+        "class": 1,
+        "width": "b",
+        "definition": "move; soften"
+    },
+    {
+        "verb": "bolaigh",
+        "future_root": "bol",
+        "class": 2,
+        "width": "b",
+        "definition": "smell, scent"
+    },
+    {
+        "verb": "bolg",
+        "future_root": "bolg",
+        "class": 1,
+        "width": "b",
+        "definition": "bolg2, v.t. & i. (vn. ~adh m, gs. & pp. ~tha). 1. Bulge. Rud a bholgadh, to bulge, swell out, sth. Seolta a bholgadh, to fill, swell, sails. Muinchillí a bholgadh, to puff out sleeves. Balla, carraig, ag ~adh (amach), wall, rock, bulging (outwards). Farraige bholgtha, swollen, heaving, sea. 2. Blister. Péint ag ~adh, paint blistering."
+    },
+    {
+        "verb": "borr",
+        "future_root": "borr",
+        "class": 1,
+        "width": "b",
+        "definition": "swell, grow"
+    },
+    {
+        "verb": "braith",
+        "future_root": "braith",
+        "class": 1,
+        "width": "s",
+        "definition": "1. perceive, feel. 2. spy out, note. 3. betray."
+    },
+    {
+        "verb": "brandáil",
+        "future_root": "brandál",
+        "class": 1,
+        "width": "b",
+        "definition": "[vt] brand"
+    },
+    {
+        "verb": "breac",
+        "future_root": "breac",
+        "class": 1,
+        "width": "b",
+        "definition": "1. Speckle, dapple. 2. Mark with letters, figures; write. 3. Lighten, change, in colour. 4. Carve, engrave"
+    },
+    {
+        "verb": "bréadaigh",
+        "future_root": "bréad",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] braid"
+    },
+    {
+        "verb": "bréag",
+        "future_root": "bréag",
+        "class": 1,
+        "width": "b",
+        "definition": "cajole"
+    },
+    {
+        "verb": "bréagnaigh",
+        "future_root": "bréagn",
+        "class": 2,
+        "width": "b",
+        "definition": "contradict, refute, belie"
+    },
+    {
+        "verb": "bréan",
+        "future_root": "bréan",
+        "class": 1,
+        "width": "b",
+        "definition": "[vt] [vi] 1. Pollute. 2. Putrefy"
+    },
+    {
+        "verb": "breáthaigh",
+        "future_root": "breáth",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] [vi] beautify; become beautiful, fine"
+    },
+    {
+        "verb": "breathnaigh",
+        "future_root": "breathn",
+        "class": 2,
+        "width": "b",
+        "definition": "1. observe, examine. \n[C] 2. look at, watch. \n3. look, appear."
+    },
+    {
+        "verb": "breithnigh",
+        "future_root": "breithn",
+        "class": 2,
+        "width": "s",
+        "definition": "(jur) adjudge"
+    },
+    {
+        "verb": "bréitseáil",
+        "future_root": "bréitseál",
+        "impersonal_present": "bréitseáiltear",
+        "class": 1,
+        "width": "b",
+        "definition": "[vt] [vi] (1. breach, break. 2. vomit.)"
+    },
+    {
+        "verb": "breoigh",
+        "future_root": "breo",
+        "class": 1,
+        "width": "b",
+        "definition": "[vt] [vi] (1. glow. 2. heat. 3. enfeeble.)"
+    },
+    {
+        "verb": "bris",
+        "future_root": "bris",
+        "class": 1,
+        "width": "s",
+        "definition": "break"
+    },
+    {
+        "verb": "brógstrapáil",
+        "future_root": "brogstrapál",
+        "class": 1,
+        "width": "b",
+        "definition": "#N/A"
+    },
+    {
+        "verb": "broim",
+        "future_root": "brom",
+        "class": 1,
+        "width": "b",
+        "definition": "fart"
+    },
+    {
+        "verb": "bronn",
+        "future_root": "bronn",
+        "class": 1,
+        "width": "b",
+        "definition": "award. grant, bestow"
+    },
+    {
+        "verb": "brostaigh",
+        "future_root": "brost",
+        "class": 2,
+        "width": "b",
+        "definition": "1. hasten, urge. 2. hurry."
+    },
+    {
+        "verb": "brúigh",
+        "future_root": "brú",
+        "class": 1,
+        "width": "b",
+        "definition": "1. press. 2. push, shove. 3. crush."
+    },
+    {
+        "verb": "brúcht",
+        "future_root": "brúcht",
+        "class": 1,
+        "width": "b",
+        "definition": "[vi] (1. belch, eructate. 2. burst forth, erupt)"
+    },
+    {
+        "verb": "bruíon",
+        "future_root": "bruíon",
+        "class": 1,
+        "width": "b",
+        "definition": "fight"
+    },
+    {
+        "verb": "brúisc",
+        "future_root": "brúisc",
+        "class": 1,
+        "width": "s",
+        "definition": "crush"
+    },
+    {
+        "verb": "bruith",
+        "future_root": "bruith",
+        "class": 1,
+        "width": "s",
+        "definition": "boil; boil (an egg)"
+    },
+    {
+        "verb": "buaigh",
+        "future_root": "bua",
+        "class": 1,
+        "width": "b",
+        "definition": "[vt][vi] 1. win, gain"
+    },
+    {
+        "verb": "buail",
+        "future_root": "buail",
+        "class": 1,
+        "width": "s",
+        "definition": "strike, hit"
+    },
+    {
+        "verb": "buair",
+        "future_root": "buair",
+        "class": 1,
+        "width": "s",
+        "definition": "grive, vex, perturb; cause worry\n(also used with bí + buartha (VA) + faoi-X = X is worried)"
+    },
+    {
+        "verb": "buain",
+        "future_root": "buan",
+        "class": 1,
+        "width": "b",
+        "definition": "reap"
+    },
+    {
+        "verb": "buanaigh",
+        "future_root": "buan",
+        "class": 2,
+        "width": "b",
+        "definition": "[vt] perpetuate"
+    },
+    {
+        "verb": "buígh",
+        "future_root": "buí",
+        "class": 1,
+        "width": "s",
+        "definition": "yellow"
+    },
+    {
+        "verb": "bunaigh",
+        "future_root": "bun",
+        "class": 2,
+        "width": "b",
+        "definition": "found, establish; (with \"ar\") base on"
+    },
+    {
+        "verb": "cabhair",
+        "future_root": "cabhr",
+        "class": 2,
+        "width": "b",
+        "definition": "Emboss, chase."
+    },
+    {
+        "verb": "cabhraigh",
+        "future_root": "cabhr",
+        "class": 2,
+        "width": "b",
+        "definition": "help"
+    },
+    {
+        "verb": "cac",
+        "future_root": "cac",
+        "class": 1,
+        "width": "b",
+        "definition": "poop"
+    },
+    {
+        "verb": "caidrigh",
+        "future_root": "caidr",
+        "class": 2,
+        "width": "s",
+        "definition": "be on friendly terms with"
+    },
+    {
+        "verb": "cáiligh",
+        "future_root": "cáil",
+        "class": 2,
+        "width": "s",
+        "definition": "qualify"
+    },
+    {
+        "verb": "caill",
+        "future_root": "caill",
+        "class": 1,
+        "width": "s",
+        "definition": "lose"
+    },
+    {
+        "verb": "cáin",
+        "future_root": "cáin",
+        "class": 1,
+        "width": "s",
+        "definition": "censure"
+    },
+    {
+        "verb": "caintigh",
+        "future_root": "caint",
+        "class": 2,
+        "width": "s",
+        "definition": "speak, talk"
+    },
+    {
+        "verb": "caith",
+        "future_root": "caith",
+        "class": 1,
+        "width": "s",
+        "definition": "A. 1. wear. 2. consume. 3. spend. \nB. 1. throw, cast. \nC. (Auxiliary verb used mainly in future & conditional to denote obligation, necessity)"
+    },
+    {
+        "verb": "caithrigh",
+        "future_root": "caithr",
+        "class": 2,
+        "width": "s",
+        "definition": "[vi] 1. Reach puberty. 2. Develop, expand."
+    },
+    {
+        "verb": "cam",
+        "future_root": "cam",
+        "class": 1,
+        "width": "b",
+        "definition": "twist"
+    },
+    {
+        "verb": "fág",
+        "future_root": "fág",
+        "class": 1,
+        "width": "b",
+        "definition": "leave"
+    },
+    {
+        "verb": "oscail",
+        "future_root": "oscl",
+        "class": 2,
+        "width": "b",
+        "definition": "open"
+    }
+]

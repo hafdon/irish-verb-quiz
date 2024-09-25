@@ -48,8 +48,45 @@ past_habitual_root_endings = {
     1: {
         's': {
             'O' : {
-
+                'analytic': 'eadh',
+                '1sg': 'inn',
+                '2sg': 'teá',
+                '1pl': 'imis',
+                '3pl': 'idís',
+                'impersonal': 'tí'
+            }
+        },
+        'b': {
+            'O' : {
+                'analytic': 'adh',
+                '1sg': 'ainn',
+                '2sg': 'tá',
+                '1pl': 'aimis',
+                '3pl': 'aidís',
+                'impersonal': 'taí'
+            }
         }
+    },
+    2: {
+        's': {
+            'O' : {
+                'analytic': 'íodh',
+                '1sg': 'ínn',
+                '2sg': 'íteá',
+                '1pl': 'ímis',
+                '3pl': 'ídís',
+                'impersonal': 'ítí'
+            }
+        },
+        'b': {
+            'O' : {
+                'analytic': 'aíodh',
+                '1sg': 'aínn',
+                '2sg': 'aíteá',
+                '1pl': 'aímis',
+                '3pl': 'aídís',
+                'impersonal': 'aítí'
+            }
         }
     }
 }
@@ -248,39 +285,6 @@ def conjugate_futurey(tense, root, root_class, root_width, dialect):
 
     return conjugation
 
-# def conjugate_conditionally_tense(tense, root, endings_class, endings_width, dialect = 'O'):
-#     """
-#     Conjugate either conditional or past_habitual
-#     """
-#
-#     conjugation = {}
-#     tense_endings = conditional_root_endings if tense == "conditional" else past_habitual_root_endings
-#     endings = tense_endings[endings_class][endings_width][dialect]
-#
-#     for pronoun, ending in endings.items():
-#         conjugation[pronoun] = []
-#
-#
-#         active_root = synthetic_form_root
-#         lytic_info = 'analytic' if pronoun == 'analytic' else 'synthetic'
-#
-#         forms = []
-#
-#         # All conditional forms, including impersonal, get lenited
-#
-#         unmarked_form = f"{add_past_particle(active_root, "do")}{ending}"
-#         negative_form =  f"{add_unmarked_particle(active_root, "Negative")}{ending}"
-#         interrogative_form =  f"{add_unmarked_particle(active_root, "Interrogative")}{ending}"
-#
-#         forms.append((unmarked_form, lytic_info, 'unmarked'))
-#         forms.append((negative_form, lytic_info, 'negative'))
-#         forms.append((interrogative_form, lytic_info, 'interrogative'))
-#
-#         conjugation[pronoun] = forms
-#
-#     return conjugation
-
-
 def conjugate_future_tense(verb_data, dialect='O'):
     root = verb_data['future_root']
     root_class = verb_data.get('future_class' , verb_data['class'])
@@ -295,12 +299,34 @@ def conjugate_present_tense(verb_data, dialect = 'O'):
 
     return conjugate_futurey("present", root, root_class, root_width, dialect)
 
-# def conjugate_past_habitual_tense(verb_data, dialect = 'O'):
-#     root = verb_data.get('present_root', verb_data['future_root'])
-#     endings_class = verb_data.get('future_class', verb_data['class'])
-#     endings_width = verb_data.get('future_width', verb_data['width'])
-#
-#     return conjugate_conditionally_tense("past_habitual", root, endings_class, endings_width, dialect)
+def conjugate_past_habitual_tense(verb_data, dialect = 'O'):
+    synthetic_form_root = verb_data.get('future_root', verb_data['verb'])
+    endings_class = verb_data.get('future_class', verb_data['class'])
+    endings_width = verb_data.get('future_width', verb_data['width'])
+
+    conjugation = {}
+    endings = past_habitual_root_endings[endings_class][endings_width][dialect]
+
+    for pronoun, ending in endings.items():
+
+        active_root = synthetic_form_root
+        lytic_info = 'analytic' if pronoun == 'analytic' else 'synthetic'
+
+        forms = []
+
+        # All Past Habitual forms, including impersonal, get lenited
+
+        unmarked_form = f"{add_past_particle(active_root, "do")}{ending}"
+        negative_form =  f"{add_unmarked_particle(active_root, "Negative")}{ending}"
+        interrogative_form =  f"{add_unmarked_particle(active_root, "Interrogative")}{ending}"
+
+        forms.append((unmarked_form, lytic_info, 'unmarked'))
+        forms.append((negative_form, lytic_info, 'negative'))
+        forms.append((interrogative_form, lytic_info, 'interrogative'))
+
+        conjugation[pronoun] = forms
+
+    return conjugation
 
 def conjugate_conditional_tense(verb_data, dialect = 'O'):
     synthetic_form_root = verb_data.get('future_root', verb_data['verb'])

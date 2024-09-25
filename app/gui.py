@@ -13,6 +13,13 @@ from app.paradigm_display import display_paradigm
 
 from typing import Dict, Any
 
+# Additional Imports for Audio Playback
+import requests
+from playsound import playsound
+import tempfile
+import urllib.parse
+import threading
+
 # Configure logging
 logging.basicConfig(
     level=logging.DEBUG,  # Set to DEBUG to capture all levels of logs
@@ -281,6 +288,35 @@ class VerbConjugationApp():
         self.result_text.tag_configure('info', foreground='blue')
         self.result_text.tag_configure('bold', font=('Arial', 10, 'bold'))
 
+        # Pronunciation buttons frame
+        self.pronunciation_frame = ttk.Frame(bottom_frame)
+        self.pronunciation_frame.grid(row=5, column=0, columnspan=6, pady=5)
+        self.pronunciation_frame.grid_remove()  # Hide initially
+
+        # Ulster pronunciation button
+        self.ulster_button = ttk.Button(
+            self.pronunciation_frame,
+            text="Ulster Pronunciation",
+            command=self.play_ulster_audio
+        )
+        self.ulster_button.grid(row=0, column=0, padx=5, pady=5)
+
+        # Munster pronunciation button
+        self.munster_button = ttk.Button(
+            self.pronunciation_frame,
+            text="Munster Pronunciation",
+            command=self.play_munster_audio
+        )
+        self.munster_button.grid(row=0, column=1, padx=5, pady=5)
+
+        # Connacht pronunciation button
+        self.connacht_button = ttk.Button(
+            self.pronunciation_frame,
+            text="Connacht Pronunciation",
+            command=self.play_connacht_audio
+        )
+        self.connacht_button.grid(row=0, column=2, padx=5, pady=5)
+
     def _create_radio_buttons(self, parent, label_text, options, variable, row, column, columns=6):
         """
         Helper method to create labeled radio buttons.
@@ -363,6 +399,9 @@ class VerbConjugationApp():
                 self._disable_radio_buttons(self.form_radio_buttons)
                 self._disable_radio_buttons(self.form_marker_radio_buttons)
                 self.check_answer_button.config(state="disabled")
+
+                # Hide pronunciation buttons
+                self.pronunciation_frame.grid_remove()
 
             except FileNotFoundError as e:
                 logging.error(f"Custom data file not found: {e}")
@@ -527,14 +566,15 @@ class VerbConjugationApp():
             # Enable tense radio buttons
             self._enable_radio_buttons(self.tense_radio_buttons)
 
+            # Hide pronunciation buttons
+            self.pronunciation_frame.grid_remove()
+
         except ValueError as ve:
             logging.error(f"ValueError in display_random_form: {ve}")
             messagebox.showerror("Error", f"An error occurred: {ve}")
         except Exception as e:
             logging.error(f"Unexpected error in display_random_form: {e}")
             messagebox.showerror("Error", f"An unexpected error occurred: {e}")
-
-
 
     def show_all_forms(self) -> None:
         """
@@ -628,6 +668,9 @@ class VerbConjugationApp():
         # Disable further interactions until next question
         self._disable_all_inputs()
 
+        # Show pronunciation buttons
+        self.pronunciation_frame.grid()
+
     def _disable_all_inputs(self):
         # Disable tense radio buttons
         self._disable_radio_buttons(self.tense_radio_buttons)
@@ -710,3 +753,52 @@ class VerbConjugationApp():
         else:
             # Disable 'Check Answer' button
             self.check_answer_button.config(state="disabled")
+
+    def play_ulster_audio(self):
+        self.play_audio('U')
+
+    def play_munster_audio(self):
+        self.play_audio('M')
+
+    def play_connacht_audio(self):
+        self.play_audio('C')
+
+    def play_audio(self, dialect_code):
+        threading.Thread(target=self._play_audio_thread, args=(dialect_code,), daemon=True).start()
+
+    def _play_audio_thread(self, dialect_code):
+        import requests
+        import urllib.parse
+        from playsound import playsound
+        import tempfile
+        import os
+
+        try:
+            verb = self.correct_verb
+            encoded_verb = urllib.parse.quote(verb)
+            if dialect_code == 'U':
+                url = f'https://www.teanglann.ie/CanU/{encoded_verb}.mp3'
+            elif dialect_code == 'M':
+                url = f'https://www.teanglann.ie/CanM/{encoded_verb}.mp3'
+            elif dialect_code == 'C':
+                url = f'https://www.teanglann.ie/CanC/{encoded_verb}.mp3'
+            else:
+                raise ValueError(f"Unknown dialect code: {dialect_code}")
+            # Download the mp3 file
+            response = requests.get(url)
+            if response.status_code == 200:
+                # Save to a temp file
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:
+                    temp_file.write(response.content)
+                    temp_file.flush()  # Ensure data is written
+                    temp_file_name = temp_file.name
+                # Play the audio file
+                playsound(temp_file_name)
+                # Remove the temp file after playing
+                os.remove(temp_file_name)
+            else:
+                self.root.after(0, messagebox.showerror, "Error", f"Audio file not found for '{verb}' in dialect '{dialect_code}'")
+        except Exception as e:
+            logging.error(f"Error playing audio: {e}")
+            # Since we're in a thread, need to use tkinter's thread-safe method to show messagebox
+            self.root.after(0, messagebox.showerror, "Error", f"An error occurred while playing audio: {e}")

@@ -107,7 +107,7 @@ def display_paradigm(root:tk.Tk, verb_data: Dict[str, Any], paradigm_data: Dict[
         for tense_name, conjugations in paradigm_data.items():
             # Create a frame for each tense
             tense_frame = ttk.Frame(notebook)
-            notebook.add(tense_frame, text=f"{tense_name.capitalize()} Tense")
+            notebook.add(tense_frame, text=f"{tense_name.title()} Tense")
 
             # Create a scrollbar for the text widget
             scrollbar = ttk.Scrollbar(tense_frame)

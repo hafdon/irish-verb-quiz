@@ -2,7 +2,7 @@ import pprint
 from typing import Dict, Any
 
 from app.utils.conjugation_utility import conjugate_future_tense, conjugate_present_tense, conjugate_past_tense, \
-    conjugate_conditional_tense
+    conjugate_conditional_tense, conjugate_past_habitual_tense
 
 def generate_full_paradigm(verb_data: Dict[str, Any], dialect = "O") -> Dict[str, Any]:
     """
@@ -15,7 +15,7 @@ def generate_full_paradigm(verb_data: Dict[str, Any], dialect = "O") -> Dict[str
         dict: A dictionary containing conjugations for all tenses.
     """
 
-    tenses = ['Present', 'Future', 'Past', 'Conditional']
+    tenses = ['Present', 'Future', 'Past', 'Conditional', 'Past Habitual']
 
     paradigm = {}
 
@@ -28,6 +28,9 @@ def generate_full_paradigm(verb_data: Dict[str, Any], dialect = "O") -> Dict[str
             conjugations = conjugate_past_tense(verb_data, dialect)
         elif tense_name.lower() == 'conditional':
             conjugations = conjugate_conditional_tense(verb_data, dialect)
+        elif tense_name.lower() == 'past habitual':
+            conjugations = conjugate_past_habitual_tense(verb_data, dialect)
+
         else:
             continue
         paradigm[tense_name] = conjugations

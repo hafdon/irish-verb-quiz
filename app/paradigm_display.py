@@ -12,6 +12,8 @@ def display_paradigm(root:tk.Tk, verb_data: Dict[str, Any], paradigm_data: Dict[
     Args:
         verb_data (dict): The data of the current verb.
         paradigm_data (dict): The full verb paradigm data.
+        :param paradigm_data:
+        :param verb_data:
         :param root:
     """
     try:

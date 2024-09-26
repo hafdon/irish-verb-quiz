@@ -197,22 +197,29 @@ class VerbConjugationApp():
         forms_selection_frame.grid(row=2, column=0, columnspan=4, pady=10, sticky='w')
 
         # Initialize BooleanVars for each verb form
+        # This dictionary holds the BooleanVar variables
+        # that track whether each tense is selected in the GUI.
         self.selected_tenses = {
-            'Present': tk.BooleanVar(value=True),
-            'Past': tk.BooleanVar(value=True),
-            'Future': tk.BooleanVar(value=True),
-            'Conditional': tk.BooleanVar(value=True),
+            'present': tk.BooleanVar(value=True),
+            'past': tk.BooleanVar(value=True),
+            'future': tk.BooleanVar(value=True),
+            'conditional': tk.BooleanVar(value=True),
             'verbal_noun': tk.BooleanVar(value=True),
             'verbal_adjective': tk.BooleanVar(value=True),
+            'dictionary_form': tk.BooleanVar(value=True),  # Added Dictionary Form
         }
 
         # Create Checkbuttons for each verb form
-        ttk.Checkbutton(forms_selection_frame, text="Present", variable=self.selected_tenses['Present']).grid(row=0, column=0, sticky='w', padx=5)
-        ttk.Checkbutton(forms_selection_frame, text="Past", variable=self.selected_tenses['Past']).grid(row=0, column=1, sticky='w', padx=5)
-        ttk.Checkbutton(forms_selection_frame, text="Future", variable=self.selected_tenses['Future']).grid(row=0, column=2, sticky='w', padx=5)
-        ttk.Checkbutton(forms_selection_frame, text="Conditional", variable=self.selected_tenses['Conditional']).grid(row=0, column=3, sticky='w', padx=5)
+        # Checkbuttons allow user to select/deselect verb forms
+        # on which they will be tested.
+        ttk.Checkbutton(forms_selection_frame, text="Present", variable=self.selected_tenses['present']).grid(row=0, column=0, sticky='w', padx=5)
+        ttk.Checkbutton(forms_selection_frame, text="Past", variable=self.selected_tenses['past']).grid(row=0, column=1, sticky='w', padx=5)
+        ttk.Checkbutton(forms_selection_frame, text="Future", variable=self.selected_tenses['future']).grid(row=0, column=2, sticky='w', padx=5)
+        ttk.Checkbutton(forms_selection_frame, text="Conditional", variable=self.selected_tenses['conditional']).grid(row=0, column=3, sticky='w', padx=5)
         ttk.Checkbutton(forms_selection_frame, text="Verbal Noun", variable=self.selected_tenses['verbal_noun']).grid(row=0, column=4, sticky='w', padx=5)
         ttk.Checkbutton(forms_selection_frame, text="Verbal Adjective", variable=self.selected_tenses['verbal_adjective']).grid(row=0, column=5, sticky='w', padx=5)
+        ttk.Checkbutton(forms_selection_frame, text="Dictionary Form",
+                        variable=self.selected_tenses['dictionary_form']).grid(row=0, column=6, sticky='w', padx=5)
 
         # === Middle Frame: Output and Entry ===
         # Output display
@@ -651,6 +658,10 @@ class VerbConjugationApp():
                 if not isinstance(verbal_adjectives, list):
                     logging.warning(f"'verbal_adjectives' is not a list in verb_data: {verb_data}")
 
+            # Include dictionary form if selected
+            if 'dictionary_form' in selected_tenses:
+                forms_list.append(('dictionary_form', 'dictionary_form', verb_data['verb']))
+
             logging.debug(f"Total Forms Collected: {len(forms_list)}")
             if not forms_list:
                 logging.warning("No forms found for the selected tenses.")
@@ -708,7 +719,9 @@ class VerbConjugationApp():
             self.user_form_var.set('')
 
             # Adjust GUI based on tense
-            if selected_tense in ['verbal_noun', 'verbal_adjective']:
+            # These are conditions that check if the selected tense
+            # is one that doesn't require form markers or pronouns
+            if selected_tense in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
                 # Disable form buttons and form marker radio buttons
                 self._disable_radio_buttons(self.form_radio_buttons)
                 self._disable_radio_buttons(self.form_marker_radio_buttons)
@@ -764,7 +777,7 @@ class VerbConjugationApp():
         # Get user inputs
         user_verb = self.verb_entry.get().strip()
         user_tense = self.user_tense_var.get()
-        user_form_marker = self.user_form_marker_var.get()
+        user_form_marker = self.user_form_marker_var.get() # e.g. Unmarked, Negative, Interrogative
         user_pronoun = self.user_form_var.get()
 
         # Clear the result_text widget
@@ -775,22 +788,23 @@ class VerbConjugationApp():
         feedback = []
 
         # Check verb correctness
-        if user_verb.lower() == self.correct_verb.lower():
-            feedback.append(("Correct: Verb", 'correct'))
+        if user_verb.lower() == self.correct_verb.lower(): # Case-Insensitive Check
+            feedback.append((f"Correct: Verb ({self.correct_verb})", 'correct'))
         else:
             feedback.append((f"Incorrect: Verb (Correct: '{self.correct_verb}')", 'incorrect'))
 
-        # **Modified Tense Comparison for Case-Insensitive Check**
         # Log the values for debugging
         logging.debug(f"User Tense: '{user_tense}' | Correct Tense: '{self.correct_tense}'")
 
-        if user_tense.lower() == self.correct_tense.lower():
+        # Check tense correctness
+        if user_tense.lower() == self.correct_tense.lower(): # Case-Insensitive Check
             feedback.append((f"Correct: Tense '{self.correct_tense}'", 'correct'))
         else:
             feedback.append((f"Incorrect: Tense (Correct: '{self.correct_tense}')", 'incorrect'))
 
-        # Check based on tense type
-        if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective']:
+        # Check pronoun and form marker based on tense type
+        # These tense types don't have pronouns or form markers to check.
+        if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
             # No form marker or pronoun to check
             pass
         else:
@@ -845,7 +859,7 @@ class VerbConjugationApp():
         if not self.correct_verb:
             return
         if entry_content.strip() and self.user_tense_var.get():
-            if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective']:
+            if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
                 # Enable the 'Check Answer' button
                 self.check_answer_button.config(state="normal")
                 # Disable form buttons
@@ -869,7 +883,7 @@ class VerbConjugationApp():
         if not self.correct_verb:
             return
         if self.verb_entry_var.get().strip() and self.user_tense_var.get():
-            if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective']:
+            if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
                 # Enable the 'Check Answer' button
                 self.check_answer_button.config(state="normal")
                 # Disable form buttons

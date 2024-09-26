@@ -10,6 +10,7 @@ A Tkinter-based application for practicing Irish verb conjugations. It allows us
 - View all conjugated forms of a verb in a separate window.
 - Edit verb definitions.
 - Load custom verb data from JSON files.
+- Integration with `teanglann.ie/en/fuaim` pronunciation files 
 - Comprehensive logging for debugging.
 
 ## Installation

@@ -1,0 +1,42 @@
+# Python Bytecode Files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyInstaller Build Folders
+build/
+dist/
+
+# PyInstaller spec file
+*.spec
+
+# Virtual Environments
+venv/
+env/
+ENV/
+
+# Packaging
+*.egg-info/
+.eggs/
+
+# Logs
+*.log
+
+# MacOS Specific
+.DS_Store
+
+# Ignore any .env files (useful for environment variables)
+.env
+
+# IDE specific files (VSCode, PyCharm, etc.)
+.vscode/
+.idea/
+
+# Coverage Reports
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+
+# Unit test / Jupyter notebooks
+.ipynb_checkpoints/

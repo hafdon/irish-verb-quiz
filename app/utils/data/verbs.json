@@ -232,8 +232,8 @@
   {
    "verb": "tacaigh",
    "definition": "support; back, hold up",
-   "verbal_nouns": "tacú",
-   "verbal_adjectives": "tacaithe",
+   "verbal_nouns": ["tacú"],
+   "verbal_adjectives": ["tacaithe"],
    "future_root": "tac",
    "class": 2,
    "width": "b"
@@ -241,8 +241,8 @@
  {
    "verb": "athraigh",
    "definition": "1. change, alter. 2. move.",
-   "verbal_nouns": "athrú",
-   "verbal_adjectives": "athraithe",
+   "verbal_nouns": ["athrú"],
+   "verbal_adjectives": ["athraithe"],
    "future_root": "athr",
    "class": 2,
    "width": "b"
@@ -250,8 +250,8 @@
  {
    "verb": "sáinnigh",
    "definition": "1. corner, trap. 2. (chess) check.",
-   "verbal_nouns": "sáinniú",
-   "verbal_adjectives": "sáinnithe",
+   "verbal_nouns": ["sáinniú"],
+   "verbal_adjectives": ["sáinnithe"],
    "future_root": "sáinn",
    "class": 2,
    "width": "s"

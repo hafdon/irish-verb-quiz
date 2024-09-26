@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["verb", "definition", "verbal_nouns", "verbal_adjectives", "future_root", "class", "width"],
+    "properties": {
+      "verb": { "type": "string" },
+      "definition": { "type": "string" },
+      "verbal_nouns": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "verbal_adjectives": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "future_root": { "type": "string" },
+      "class": { "type": "integer" },
+      "width": { "type": "string", "enum": ["b", "s"] }
+    },
+    "additionalProperties": false
+  }
+}

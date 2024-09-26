@@ -17,8 +17,8 @@ A Tkinter-based application for practicing Irish verb conjugations. It allows us
 1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/yourusername/verb_conjugation_app.git
-    cd verb_conjugation_app
+    git clone https://github.com/hafdon/irish-verb-quiz.git
+    cd irish-verb-quiz
     ```
 
 2. **Set Up a Virtual Environment (Optional but Recommended):**
@@ -42,6 +42,16 @@ Run the application using the following command:
 python main.py
 ```
 
-## build
+Or, build the application to an executable at `dist/main.exe`:
 
-`pyinstaller --onefile --add-data "app/utils/data/verbs.json:data" main.py`
+```bash
+pyinstaller --onefile --add-data "app/utils/data/verbs.json:data" main.py
+```
+
+### Validate data file
+
+Validate your custom data file:
+
+```bash
+ python validate_json.py <path/to/your/data.json> tests/schema.json
+```

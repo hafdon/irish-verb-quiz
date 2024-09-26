@@ -16,7 +16,7 @@
         "items": { "type": "string" }
       },
       "future_root": { "type": "string" },
-      "class": { "type": "integer" },
+      "class": { "type": "integer", "enum" : [1, 2] },
       "width": { "type": "string", "enum": ["b", "s"] }
     },
     "additionalProperties": false

@@ -66,6 +66,9 @@ class VerbConjugationApp():
         # **Initialize the Dialect Variable**
         self.dialect_var = tk.StringVar(value='O')  # Default dialect is Official
 
+        # Initialize a flag to track if we're in dictionary-form-only mode
+        self.only_dictionary_form_selected = False
+
         # Initialize GUI components
         self._init_gui()
 
@@ -315,7 +318,7 @@ class VerbConjugationApp():
         self.check_answer_button.grid(row=3, column=0, pady=10, sticky='w')
 
         # Result display
-        self.result_text = tk.Text(bottom_frame, height=6, width=60, wrap='word', state='disabled')
+        self.result_text = tk.Text(bottom_frame, height=1, width=60, wrap='word', state='disabled')
         self.result_text.grid(row=4, column=0, columnspan=6, pady=5)
 
         # Define tags for coloring
@@ -592,6 +595,10 @@ class VerbConjugationApp():
                 return
             logging.debug(f"Selected Tenses for Quiz: {selected_tenses}")
 
+            # Check if only "Dictionary Form" is selected
+            self.only_dictionary_form_selected = len(selected_tenses) == 1 and 'dictionary_form' in selected_tenses
+
+
             # **Get the selected dialect**
             selected_dialect = self.dialect_var.get()
             logging.debug(f"Selected Dialect: {selected_dialect}")
@@ -689,54 +696,72 @@ class VerbConjugationApp():
                 form_type = ''
                 form_marker = ''
 
-            # Display the form to the user
-            self.output_text.config(state='normal')
-            self.output_text.delete('1.0', tk.END)
-            self.output_text.insert(tk.END, f"Identify the verb, tense, form, and type:\n\n{form}\n")
-            self.output_text.config(state='disabled')
+            if self.only_dictionary_form_selected:
+                # Display the verb
+                self.output_text.config(state='normal')
+                self.output_text.delete('1.0', tk.END)
+                self.output_text.insert(tk.END, f"Recall the definition for the verb:\n\n{self.correct_verb}\n")
+                self.output_text.config(state='disabled')
 
-            # Clear the result_text widget
-            self.result_text.config(state='normal')
-            self.result_text.delete('1.0', tk.END)
-            self.result_text.config(state='disabled')
-
-            # Clear the verb entry
-            self.verb_entry.delete(0, tk.END)
-
-            # Store the correct answers for later comparison
-            self.correct_verb = verb
-            self.correct_definition = definition
-            self.correct_pronoun = selected_pronoun
-            self.correct_form_type = form_type
-            self.correct_tense = selected_tense
-            self.correct_form_marker = form_marker
-            self.current_conjugations = paradigm_data  # Update current conjugations
-            self.current_verb_data = verb_data  # Store verb data for later use
-
-            # Clear user's selections
-            self.user_tense_var.set('')
-            self.user_form_marker_var.set('')
-            self.user_form_var.set('')
-
-            # Adjust GUI based on tense
-            # These are conditions that check if the selected tense
-            # is one that doesn't require form markers or pronouns
-            if selected_tense in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
-                # Disable form buttons and form marker radio buttons
-                self._disable_radio_buttons(self.form_radio_buttons)
+                # Disable all input fields
+                self.verb_entry.delete(0, tk.END)
+                self.verb_entry.config(state='disabled')
+                self._disable_radio_buttons(self.tense_radio_buttons)
                 self._disable_radio_buttons(self.form_marker_radio_buttons)
+                self._disable_radio_buttons(self.form_radio_buttons)
+
                 # Enable 'Check Answer' button
                 self.check_answer_button.config(state="normal")
             else:
-                # Enable form marker radio buttons
-                self._enable_radio_buttons(self.form_marker_radio_buttons)
-                # Disable form buttons initially
-                self._disable_radio_buttons(self.form_radio_buttons)
-                # Disable 'Check Answer' button
-                self.check_answer_button.config(state="disabled")
 
-            # Enable tense radio buttons
-            self._enable_radio_buttons(self.tense_radio_buttons)
+                # Display the form to the user
+                self.output_text.config(state='normal')
+                self.output_text.delete('1.0', tk.END)
+                self.output_text.insert(tk.END, f"Identify the verb, tense, form, and type:\n\n{form}\n")
+                self.output_text.config(state='disabled')
+
+                # Clear the result_text widget
+                self.result_text.config(state='normal')
+                self.result_text.delete('1.0', tk.END)
+                self.result_text.config(state='disabled')
+
+                # Clear the verb entry
+                self.verb_entry.delete(0, tk.END)
+
+                # Store the correct answers for later comparison
+                self.correct_verb = verb
+                self.correct_definition = definition
+                self.correct_pronoun = selected_pronoun
+                self.correct_form_type = form_type
+                self.correct_tense = selected_tense
+                self.correct_form_marker = form_marker
+                self.current_conjugations = paradigm_data  # Update current conjugations
+                self.current_verb_data = verb_data  # Store verb data for later use
+
+                # Clear user's selections
+                self.user_tense_var.set('')
+                self.user_form_marker_var.set('')
+                self.user_form_var.set('')
+
+                # Adjust GUI based on tense
+                # These are conditions that check if the selected tense
+                # is one that doesn't require form markers or pronouns
+                if selected_tense in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
+                    # Disable form buttons and form marker radio buttons
+                    self._disable_radio_buttons(self.form_radio_buttons)
+                    self._disable_radio_buttons(self.form_marker_radio_buttons)
+                    # Enable 'Check Answer' button
+                    self.check_answer_button.config(state="normal")
+                else:
+                    # Enable form marker radio buttons
+                    self._enable_radio_buttons(self.form_marker_radio_buttons)
+                    # Disable form buttons initially
+                    self._disable_radio_buttons(self.form_radio_buttons)
+                    # Disable 'Check Answer' button
+                    self.check_answer_button.config(state="disabled")
+
+                # Enable tense radio buttons
+                self._enable_radio_buttons(self.tense_radio_buttons)
 
             # Hide pronunciation buttons
             self.pronunciation_frame.grid_remove()
@@ -769,6 +794,7 @@ class VerbConjugationApp():
             messagebox.showerror("Error", f"An error occurred while showing all forms: {e}")
 
     def check_answer(self):
+
         # Check if correct_verb is set
         if not self.correct_verb:
             messagebox.showinfo("No Verb Generated", "Please generate a verb form first.")
@@ -787,62 +813,77 @@ class VerbConjugationApp():
         # Initialize feedback
         feedback = []
 
-        # Check verb correctness
-        if user_verb.lower() == self.correct_verb.lower(): # Case-Insensitive Check
-            feedback.append((f"Correct: Verb ({self.correct_verb})", 'correct'))
-        else:
-            feedback.append((f"Incorrect: Verb (Correct: '{self.correct_verb}')", 'incorrect'))
-
-        # Log the values for debugging
-        logging.debug(f"User Tense: '{user_tense}' | Correct Tense: '{self.correct_tense}'")
-
-        # Check tense correctness
-        if user_tense.lower() == self.correct_tense.lower(): # Case-Insensitive Check
-            feedback.append((f"Correct: Tense '{self.correct_tense}'", 'correct'))
-        else:
-            feedback.append((f"Incorrect: Tense (Correct: '{self.correct_tense}')", 'incorrect'))
-
-        # Check pronoun and form marker based on tense type
-        # These tense types don't have pronouns or form markers to check.
-        if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
-            # No form marker or pronoun to check
+        if self.only_dictionary_form_selected:
             pass
         else:
-            # Check pronoun/form type
-            pronoun_match = False
-            if user_pronoun == self.correct_pronoun:
-                pronoun_match = True
-            elif self.correct_pronoun in ['relative1', 'relative2'] and user_pronoun == 'relative':
-                pronoun_match = True
-            elif user_pronoun == self.correct_form_type:
-                pronoun_match = True
 
-            if pronoun_match:
-                feedback.append((f"Correct: Form [{self.correct_pronoun}]", 'correct'))
+            # Check verb correctness
+            if user_verb.lower() == self.correct_verb.lower(): # Case-Insensitive Check
+                feedback.append((f"Correct: Verb ({self.correct_verb})", 'correct'))
             else:
-                feedback.append((f"Incorrect: Form (Correct: [{self.correct_pronoun}])", 'incorrect'))
+                feedback.append((f"Incorrect: Verb (Correct: '{self.correct_verb}')", 'incorrect'))
 
-            # Check form marker
-            if user_form_marker == self.correct_form_marker:
-                feedback.append((f"Correct: Form Type '{self.correct_form_marker}'", 'correct'))
+            # Log the values for debugging
+            logging.debug(f"User Tense: '{user_tense}' | Correct Tense: '{self.correct_tense}'")
+
+            # Check tense correctness
+            if user_tense.lower() == self.correct_tense.lower(): # Case-Insensitive Check
+                feedback.append((f"Correct: Tense '{self.correct_tense}'", 'correct'))
             else:
-                feedback.append((f"Incorrect: Form Type (Correct: '{self.correct_form_marker}')", 'incorrect'))
+                feedback.append((f"Incorrect: Tense (Correct: '{self.correct_tense}')", 'incorrect'))
 
-        # Display feedback
-        for message, tag in feedback:
-            self.result_text.insert(tk.END, message + "\n", tag)
+            # Check pronoun and form marker based on tense type
+            # These tense types don't have pronouns or form markers to check.
+            if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
+                # No form marker or pronoun to check
+                pass
+            else:
+                # Check pronoun/form type
+                pronoun_match = False
+                if user_pronoun == self.correct_pronoun:
+                    pronoun_match = True
+                elif self.correct_pronoun in ['relative1', 'relative2'] and user_pronoun == 'relative':
+                    pronoun_match = True
+                elif user_pronoun == self.correct_form_type:
+                    pronoun_match = True
+
+                if pronoun_match:
+                    feedback.append((f"Correct: Form [{self.correct_pronoun}]", 'correct'))
+                else:
+                    feedback.append((f"Incorrect: Form (Correct: [{self.correct_pronoun}])", 'incorrect'))
+
+                # Check form marker
+                if user_form_marker == self.correct_form_marker:
+                    feedback.append((f"Correct: Form Type '{self.correct_form_marker}'", 'correct'))
+                else:
+                    feedback.append((f"Incorrect: Form Type (Correct: '{self.correct_form_marker}')", 'incorrect'))
+
+            # Display feedback
+            for message, tag in feedback:
+                self.result_text.insert(tk.END, message + "\n", tag)
 
         # Display the definition if available
         if self.correct_definition:
             self.result_text.insert(tk.END, f"\nDefinition: {self.correct_definition}", 'info')
+        else:
+            self.result_text.insert(tk.END, "No definition available.", 'info')
 
+        # Disable interaction with result text box
         self.result_text.config(state='disabled')
+
+        # Adjust the size of result_text to fit the content
+        self._adjust_result_text_height()
 
         # Disable further interactions until next question
         self._disable_all_inputs()
 
         # Show pronunciation buttons
         self.pronunciation_frame.grid()
+
+    def _adjust_result_text_height(self):
+        self.result_text.update_idletasks()
+        num_lines = int(self.result_text.index('end').split('.')[0])
+        self.result_text.config(height=num_lines)
 
     def _disable_all_inputs(self):
         # Disable tense radio buttons
@@ -853,10 +894,12 @@ class VerbConjugationApp():
         self._disable_radio_buttons(self.form_radio_buttons)
         # Disable 'Check Answer' button
         self.check_answer_button.config(state="disabled")
+        # Disable verb entry
+        self.verb_entry.config(state='disabled')
 
     def on_verb_entry_change(self, *args):
         entry_content = self.verb_entry_var.get()
-        if not self.correct_verb:
+        if not self.correct_verb or self.only_dictionary_form_selected:
             return
         if entry_content.strip() and self.user_tense_var.get():
             if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
@@ -880,7 +923,7 @@ class VerbConjugationApp():
             self.check_answer_button.config(state="disabled")
 
     def on_tense_selected(self, *args):
-        if not self.correct_verb:
+        if not self.correct_verb or self.only_dictionary_form_selected:
             return
         if self.verb_entry_var.get().strip() and self.user_tense_var.get():
             if self.correct_tense.lower() in ['verbal_noun', 'verbal_adjective', 'dictionary_form']:
@@ -904,7 +947,7 @@ class VerbConjugationApp():
             self.check_answer_button.config(state="disabled")
 
     def on_form_marker_selected(self, *args):
-        if not self.correct_verb:
+        if not self.correct_verb or self.only_dictionary_form_selected:
             return
         if self.verb_entry_var.get().strip() and self.user_tense_var.get() and self.user_form_marker_var.get():
             # Enable form buttons
@@ -918,7 +961,7 @@ class VerbConjugationApp():
             self.check_answer_button.config(state="disabled")
 
     def on_form_selected(self, *args):
-        if not self.correct_verb:
+        if not self.correct_verb or self.only_dictionary_form_selected:
             return
         if self.verb_entry_var.get().strip() and self.user_tense_var.get() and self.user_form_var.get():
             # Enable 'Check Answer' button

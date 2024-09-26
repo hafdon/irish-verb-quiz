@@ -1,34 +1,40 @@
 # gui.py
 import json
+import logging
 import os
+import random
+import tempfile
 import textwrap
+import threading
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
-import logging
-import random
 
-from app.utils.full_paradigm_utility import generate_full_paradigm
-from app.utils.definition_utility import edit_definition
-from app.utils.load_verbs_utility import load_verbs
 from app.paradigm_display import display_paradigm
-
-from typing import Dict, Any
-
-# Additional Imports for Audio Playback
-import requests
-from playsound import playsound
-import tempfile
-import urllib.parse
-import threading
+from app.utils.definition_utility import edit_definition
+from app.utils.full_paradigm_utility import generate_full_paradigm
+from app.utils.load_verbs_utility import load_verbs
 
 # Configure logging
-logging.basicConfig(
-    level=logging.DEBUG,  # Set to DEBUG to capture all levels of logs
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='../app.log',  # Log to a file named app.log
-    filemode='a'  # Append mode
-)
 
+# Get a temporary directory
+temp_dir = tempfile.gettempdir()
+log_file_path = os.path.join(temp_dir, 'app.log')
+
+# Handle Exceptions When Configuring Logging
+try:
+    logging.basicConfig(
+        level=logging.DEBUG,  # Set to DEBUG to capture all levels of logs
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        filename=log_file_path,
+        filemode='a'
+    )
+except PermissionError as e:
+    # If logging to a file fails, log to stderr
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+    logging.error(f"Failed to write log to {log_file_path}: {e}")
 
 class VerbConjugationApp():
     def __init__(self, root: tk.Tk):

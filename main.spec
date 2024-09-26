@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('app/utils/data/verbs_data.json', 'data')],
+    datas=[('app/utils/data/verbs.json', 'data')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

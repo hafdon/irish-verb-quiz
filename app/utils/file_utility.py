@@ -58,5 +58,5 @@ def ensure_data_file(custom_path: str = None) -> None:
                 # If running normally and the default file doesn't exist, raise an error
                 raise FileNotFoundError(f"Data file '{data_file}' not found.")
 
-# Remove the automatic call to ensure_data_file to allow dynamic loading
+### To allow dynamic loading, uncomment this call to `ensure_data_file()`:
 # ensure_data_file()

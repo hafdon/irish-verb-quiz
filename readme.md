@@ -44,4 +44,4 @@ python main.py
 
 ## build
 
-`pyinstaller --onefile --add-data "app/utils/data/verbs_data.json:data" main.py`
+`pyinstaller --onefile --add-data "app/utils/data/verbs.json:data" main.py`

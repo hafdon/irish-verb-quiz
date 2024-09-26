@@ -39,6 +39,9 @@ class VerbConjugationApp():
         self.current_paradigm = None
         self.current_verb_data = None
 
+        # **Initialize verb selection variables**
+        self.verb_selection_vars = {}
+
         # Load default verbs
         self.load_default_verbs()
 
@@ -59,6 +62,11 @@ class VerbConjugationApp():
         # Initialize GUI components
         self._init_gui()
 
+        # **Bind Shortcuts**
+        self.root.bind('<Command-r>', lambda event: self.display_random_form())
+        self.root.bind('<Command-c>', lambda event: self.check_answer())
+
+
     def load_default_verbs(self):
         """
         Load verbs from the default data file.
@@ -66,6 +74,12 @@ class VerbConjugationApp():
         try:
             self.verbs = load_verbs()
             logging.debug(f"Loaded {len(self.verbs)} verbs from default data file.")
+
+            # **Update verb selection variables**
+            for verb_data in self.verbs:
+                verb = verb_data['verb']
+                if verb not in self.verb_selection_vars:
+                    self.verb_selection_vars[verb] = tk.BooleanVar(value=True)
         except FileNotFoundError as e:
             logging.error(f"Default data file not found: {e}")
             messagebox.showerror("Error", f"Default data file not found: {e}")
@@ -85,7 +99,7 @@ class VerbConjugationApp():
         # === Top Frame: Buttons ===
         self.generate_button = ttk.Button(
             top_frame,
-            text="Generate Random Form",
+            text="Generate Random Form (⌘R)",
             command=self.display_random_form
         )
         self.generate_button.grid(row=0, column=0, padx=5, pady=5)
@@ -130,6 +144,14 @@ class VerbConjugationApp():
 
         # Add a trace to show/hide the label based on checkbox state
         self.freeze_verb_var.trace_add('write', self.update_frozen_label)
+
+        # Add the "Select Verbs" button
+        self.select_verbs_button = ttk.Button(
+            top_frame,
+            text="Select Verbs",
+           command=self.select_verbs
+        )
+        self.select_verbs_button.grid(row=0, column=6, padx=5, pady=5)
 
         # === Top Frame: Verb Forms Selection ===
 
@@ -272,7 +294,7 @@ class VerbConjugationApp():
         # 'Check Answer' button
         self.check_answer_button = ttk.Button(
             bottom_frame,
-            text="Check Answer",
+            text="Check Answer (⌘C)",
             command=self.check_answer,
             state="disabled"
         )
@@ -362,6 +384,71 @@ class VerbConjugationApp():
         for rb in radio_buttons:
             rb.config(state="disabled")
 
+    def select_all_verbs(self):
+        for var in self.verb_selection_vars.values():
+            var.set(True)
+
+    def deselect_all_verbs(self):
+        for var in self.verb_selection_vars.values():
+            var.set(False)
+
+    def select_verbs(self):
+        """
+        Open a dialog window where the user can select/deselect verbs to include in the quiz.
+        """
+        # Create a new Toplevel window
+        verb_selection_window = tk.Toplevel(self.root)
+        verb_selection_window.title("Select Verbs to Include in Quiz")
+        verb_selection_window.geometry("400x600")
+
+        # Add a scrollbar
+        scrollbar = ttk.Scrollbar(verb_selection_window)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        # Create a canvas to support scrolling
+        canvas = tk.Canvas(verb_selection_window, yscrollcommand=scrollbar.set)
+        canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        scrollbar.config(command=canvas.yview)
+
+        # Create a frame inside the canvas
+        frame = ttk.Frame(canvas)
+        canvas.create_window((0, 0), window=frame, anchor='nw')
+
+        # Update the scrollregion when all widgets are in
+        frame.bind("<Configure>", lambda event: canvas.configure(scrollregion=canvas.bbox("all")))
+
+        # Create a dict to hold the BooleanVar for each verb
+        if not hasattr(self, 'verb_selection_vars'):
+            self.verb_selection_vars = {}
+        else:
+            # Remove vars for verbs that are no longer in self.verbs
+            current_verbs = set(verb_data['verb'] for verb_data in self.verbs)
+            self.verb_selection_vars = {verb: var for verb, var in self.verb_selection_vars.items() if
+                                        verb in current_verbs}
+
+        # Add checkbuttons for each verb
+        for idx, verb_data in enumerate(self.verbs):
+            verb = verb_data['verb']
+            var = self.verb_selection_vars.get(verb, tk.BooleanVar(value=True))
+            self.verb_selection_vars[verb] = var
+            cb = ttk.Checkbutton(frame, text=verb, variable=var)
+            cb.grid(row=idx, column=0, sticky='w')
+
+        # Add "Select All" and "Deselect All" buttons
+        button_frame = ttk.Frame(verb_selection_window)
+        button_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)
+
+        select_all_button = ttk.Button(button_frame, text="Select All", command=self.select_all_verbs)
+        select_all_button.pack(side=tk.LEFT, padx=5)
+
+        deselect_all_button = ttk.Button(button_frame, text="Deselect All", command=self.deselect_all_verbs)
+        deselect_all_button.pack(side=tk.LEFT, padx=5)
+
+        # Add a "Save Selection" button
+        save_button = ttk.Button(button_frame, text="Save Selection", command=verb_selection_window.destroy)
+        save_button.pack(side=tk.RIGHT, padx=5)
+
     def load_custom_verb_data(self):
         """
         Open a file dialog for the user to select a custom verb data file.
@@ -375,6 +462,11 @@ class VerbConjugationApp():
             try:
                 # Load verbs from the selected file
                 self.verbs = load_verbs(custom_path=file_path)
+                # **Reset verb selection variables**
+                self.verb_selection_vars = {}
+                for verb_data in self.verbs:
+                    verb = verb_data['verb']
+                    self.verb_selection_vars[verb] = tk.BooleanVar(value=True)
                 self.current_paradigm = None  # Reset current paradigm
                 self.current_verb_data = None  # Reset current verb data
                 messagebox.showinfo("Success", f"Successfully loaded verb data from '{os.path.basename(file_path)}'.")
@@ -438,7 +530,15 @@ class VerbConjugationApp():
             selected_dialect = self.dialect_var.get()
             logging.debug(f"Selected Dialect: {selected_dialect}")
 
-            # **Step 1: Determine Whether to Use a Frozen Verb or Select a New One**
+            # **Get the list of selected verbs**
+            selected_verbs = [verb_data for verb_data in self.verbs if
+                              self.verb_selection_vars.get(verb_data['verb'], tk.BooleanVar(value=True)).get()]
+            if not selected_verbs:
+                messagebox.showwarning("No Verbs Selected", "Please select at least one verb to include in the quiz.")
+                return
+            logging.debug(f"Number of Selected Verbs: {len(selected_verbs)}")
+
+            # **Determine Whether to Use a Frozen Verb or Select a New One**
             if self.freeze_verb_var.get() and self.current_verb_data:
                 # Use the currently frozen verb
                 verb_data = self.current_verb_data
@@ -446,8 +546,8 @@ class VerbConjugationApp():
                 definition = verb_data.get('definition', '')
                 logging.debug(f"Using frozen verb: {verb}")
             else:
-                # Select a new random verb
-                verb_data = random.choice(self.verbs)
+                # Select a new random verb from selected verbs
+                verb_data = random.choice(selected_verbs)
                 verb = verb_data['verb']
                 definition = verb_data.get('definition', '')
                 logging.debug(f"Selected Random Verb: {verb}")

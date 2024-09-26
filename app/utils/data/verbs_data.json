@@ -1,0 +1,223 @@
+[
+  {
+    "verb": "oscail",
+    "future_root": "oscl",
+    "class": 2,
+    "width": "b",
+    "definition": "open",
+    "verbal_nouns": [
+      "oscailt"
+    ],
+    "verbal_adjectives": [
+      "oscailte"
+    ]
+  },
+  {
+    "verb": "achainigh",
+    "future_root": "achain",
+    "class": 2,
+    "width": "s",
+    "definition": "request",
+    "verbal_nouns": [
+      "achainí"
+    ],
+    "verbal_adjectives": [
+      "achainithe"
+    ]
+  },
+  {
+    "verb": "achoimrigh",
+    "future_root": "achoimr",
+    "class": 2,
+    "width": "s",
+    "definition": "[vt] summarize; recapitulate",
+    "verbal_nouns": [
+      "achoimriú"
+    ],
+    "verbal_adjectives": [
+      "achoimrithe"
+    ]
+  },
+  {
+    "verb": "féach",
+    "definition": "[M] look",
+    "verbal_nouns": [
+      "féachaint"
+    ],
+    "verbal_adjectives": [
+      "féachta"
+    ],
+    "future_root": "féach",
+    "class": 1,
+    "width": "b"
+  },
+  {
+    "verb": "tagair",
+    "definition": "1. refer, allude. 2. mention.",
+    "verbal_nouns": [
+      "tagairt"
+    ],
+    "verbal_adjectives": [
+      "tagartha"
+    ],
+    "future_root": "tagr",
+    "class": 2,
+    "width": "b"
+  },
+  {
+    "verb": "dóigh",
+    "definition": "burn",
+    "verbal_nouns": [
+      "dó"
+    ],
+    "verbal_adjectives": [
+      "dóite"
+    ],
+    "future_root": "dó",
+    "class": 1,
+    "width": "b"
+  },
+  {
+    "verb": "cabhair",
+    "definition": "Emboss, chase.  cabhraigh 1, v.i. (vn. -rú m, gs. -ithe). Help. Cabhrú le duine, to help s.o. Cabhrú agus neartú le duine, to aid and abet s.o. (Var:vn. cabhradh2)",
+    "verbal_nouns": [
+      "cabhradh"
+    ],
+    "verbal_adjectives": [
+      "cabhartha"
+    ],
+    "future_root": "cabhr",
+    "class": 2,
+    "width": "b"
+  },
+  {
+    "verb": "beartaigh",
+    "definition": "1. (Lit) cast. 2. poise, brandish. 3. plan, contrive.",
+    "verbal_nouns": [
+      "beartú"
+    ],
+    "verbal_adjectives": [
+      "beartaithe"
+    ],
+    "future_root": "beart",
+    "class": 2,
+    "width": "b"
+  },
+  {
+    "verb": "scairt",
+    "definition": "1. shout, call. 2. burst out.",
+    "verbal_nouns": [
+      "scairteadh"
+    ],
+    "verbal_adjectives": [
+      "scairte"
+    ],
+    "future_root": "scairt",
+    "class": 1,
+    "width": "s"
+  },
+  {
+    "verb": "comhair",
+    "definition": "count, calculate",
+    "verbal_nouns": [
+      "comhaireamh"
+    ],
+    "verbal_adjectives": [
+      "comhairthe"
+    ],
+    "future_root": "comhair",
+    "class": 1,
+    "width": "s"
+  },
+  {
+    "verb": "áirithigh",
+    "definition": "ensure",
+    "verbal_nouns": [
+      "áirithint"
+    ],
+    "verbal_adjectives": [
+      "áirithe"
+    ],
+    "future_root": "áirith",
+    "class": 2,
+    "width": "s"
+  },
+  {
+    "verb": "saighid",
+    "definition": "incite",
+    "verbal_nouns": [
+      "saighdeadh"
+    ],
+    "verbal_adjectives": [
+      "saighdte"
+    ],
+    "future_root": "saighd",
+    "class": 1,
+    "width": "s"
+  },
+  {
+    "verb": "comhraic",
+    "definition": "encounter, fight, fall in with",
+    "verbal_nouns": [
+      "comhrac"
+    ],
+    "verbal_adjectives": [
+      "comhraicthe"
+    ],
+    "future_root": "comhraic",
+    "class": 1,
+    "width": "s"
+  },
+  {
+    "verb": "casaoid",
+    "definition": "complain",
+    "verbal_nouns": [
+      "casaoid"
+    ],
+    "verbal_adjectives": [
+      "casaoidte"
+    ],
+    "future_root": "casaoid",
+    "class": 1,
+    "width": "s"
+  },
+  {
+    "verb": "fíoraigh",
+    "definition": "[vt] 1. Verify.   2. Fulfil.",
+    "verbal_nouns": [
+      "fíorú"
+    ],
+    "verbal_adjectives": [
+      "fíoraithe, fíoraithe"
+    ],
+    "future_root": "fíor",
+    "class": 2,
+    "width": "b"
+  },
+  {
+    "verb": "aibigh",
+    "definition": "ripen, mature",
+    "verbal_nouns": [
+      "aibiú"
+    ],
+    "verbal_adjectives": [
+      "aibithe"
+    ],
+    "future_root": "aib",
+    "class": 2,
+    "width": "s"
+  },
+  {
+    "verb": "truaigh",
+    "definition": "1. make lean; emaciate. 2. become thin; waste away",
+    "verbal_nouns": [
+      "trua"
+    ],
+    "verbal_adjectives": [
+      "truaite"
+    ],
+    "future_root": "trua",
+    "class": 1,
+    "width": "b"
+  }
+]

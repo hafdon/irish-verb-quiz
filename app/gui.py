@@ -17,8 +17,9 @@ from logging_config import configure_logging
 # Configure logging
 configure_logging()
 
-class VerbConjugationApp():
+class VerbConjugationApp:
     def __init__(self, root: tk.Tk):
+
         self.root = root
         self.root.title("Irish Verb Conjugation Quiz")
 
@@ -26,6 +27,8 @@ class VerbConjugationApp():
         self.verbs = []
         self.current_paradigm = None
         self.current_verb_data = None
+        self.current_conjugations = None
+        self.selected_form = None
 
         # **Initialize verb selection variables**
         self.verb_selection_vars = {}
@@ -54,6 +57,20 @@ class VerbConjugationApp():
         self.root.bind('<Command-r>', lambda event: self.display_random_form())
         self.root.bind('<Command-c>', lambda event: self.check_answer())
 
+    def adjust_result_text_size(self):
+        """
+        Adjust the size of the result_text widget to fit its contents and wrap text at a certain length.
+        """
+        content = self.result_text.get("1.0", tk.END)
+        lines = content.split("\n")
+        num_lines = len(lines)
+        # max_line_length = max(len(line) for line in lines)
+
+        # Set the width to a fixed value for wrapping
+        fixed_width = 120  # Adjust this value as needed
+
+        # Set the height based on the number of lines
+        self.result_text.config(height=num_lines, width=fixed_width, wrap='word')
 
     def load_default_verbs(self):
         """
@@ -305,6 +322,7 @@ class VerbConjugationApp():
         self.result_text.tag_configure('correct', foreground='green')
         self.result_text.tag_configure('incorrect', foreground='red')
         self.result_text.tag_configure('info', foreground='blue')
+        self.result_text.tag_configure('warning', foreground='orange')
         self.result_text.tag_configure('bold', font=('Arial', 10, 'bold'))
 
         # Pronunciation buttons frame
@@ -585,6 +603,8 @@ class VerbConjugationApp():
                 form_type = ''
                 form_marker = ''
 
+            self.selected_form = form
+
             # Display the form to the user
             self.output_text.config(state='normal')
             self.output_text.delete('1.0', tk.END)
@@ -724,6 +744,19 @@ class VerbConjugationApp():
             else:
                 feedback.append((f"Incorrect: Form Type (Correct: '{self.correct_form_marker}')", 'incorrect'))
 
+        # Check if correct_verb is the same as any other verb forms in the complete paradigm
+        for tense, conjugations in self.current_paradigm.items():
+            for pronoun, forms in conjugations.items():
+                for form_entry in forms:
+                    if isinstance(form_entry, (list, tuple)):
+                        form = form_entry[0]
+                    else:
+                        form = form_entry
+                    if form == self.selected_form: # Irish verbs are case-sensitive
+                        feedback.append((
+                                        f"\nNote: The verb form '{self.selected_form}' is also a form in the {tense} [{pronoun}]",
+                                        'warning'))
+
         # Display feedback
         for message, tag in feedback:
             self.result_text.insert(tk.END, message + "\n", tag)
@@ -733,6 +766,9 @@ class VerbConjugationApp():
             self.result_text.insert(tk.END, f"\nDefinition: {self.correct_definition}", 'info')
 
         self.result_text.config(state='disabled')
+
+        # Adjust the size of the result_text widget
+        self.adjust_result_text_size()
 
         # Disable further interactions until next question
         self._disable_all_inputs()

@@ -204,25 +204,26 @@ class VerbConjugationApp():
                         variable=self.selected_tenses['dictionary_form']).grid(row=0, column=6, sticky='w', padx=5)
 
         # === Middle Frame: Output and Entry ===
-        # Output display
-        self.output_text = tk.Text(middle_frame, height=5, width=60, wrap='word')
-        self.output_text.grid(row=0, column=0, columnspan=6, pady=5)
-
-        # Label and entry for the dictionary form of the verb
-        self.verb_entry_label = ttk.Label(
-            middle_frame,
-            text="Enter the dictionary form of the verb:"
-        )
-        self.verb_entry_label.grid(row=1, column=0, columnspan=6, sticky='w', pady=(10, 0))
-
-        self.verb_entry_var = tk.StringVar()
-        self.verb_entry = ttk.Entry(
-            middle_frame,
-            width=30,
-            textvariable=self.verb_entry_var
-        )
-        self.verb_entry.grid(row=2, column=0, columnspan=6, pady=5)
-        self.verb_entry_var.trace_add('write', self.on_verb_entry_change)
+        self._init_middle_frame(middle_frame)
+        # # Output display
+        # self.output_text = tk.Text(middle_frame, height=5, width=60, wrap='word')
+        # self.output_text.grid(row=0, column=0, columnspan=6, pady=5)
+        #
+        # # Label and entry for the dictionary form of the verb
+        # self.verb_entry_label = ttk.Label(
+        #     middle_frame,
+        #     text="Enter the dictionary form of the verb:"
+        # )
+        # self.verb_entry_label.grid(row=1, column=0, columnspan=6, sticky='w', pady=(10, 0))
+        #
+        # self.verb_entry_var = tk.StringVar()
+        # self.verb_entry = ttk.Entry(
+        #     middle_frame,
+        #     width=30,
+        #     textvariable=self.verb_entry_var
+        # )
+        # self.verb_entry.grid(row=2, column=0, columnspan=6, pady=5)
+        # self.verb_entry_var.trace_add('write', self.on_verb_entry_change)
 
         # === Bottom Frame: Selections and Check Button ===
         # Tense selection
@@ -334,6 +335,28 @@ class VerbConjugationApp():
             command=self.play_connacht_audio
         )
         self.connacht_button.grid(row=0, column=2, padx=5, pady=5)
+
+    def _init_middle_frame(self, parent):
+        # === Middle Frame: Output and Entry ===
+        # Output display
+        self.output_text = tk.Text(parent, height=5, width=60, wrap='word')
+        self.output_text.grid(row=0, column=0, columnspan=6, pady=5)
+
+        # Label and entry for the dictionary form of the verb
+        self.verb_entry_label = ttk.Label(
+            parent,
+            text="Enter the dictionary form of the verb:"
+        )
+        self.verb_entry_label.grid(row=1, column=0, columnspan=6, sticky='w', pady=(10, 0))
+
+        self.verb_entry_var = tk.StringVar()
+        self.verb_entry = ttk.Entry(
+            parent,
+            width=30,
+            textvariable=self.verb_entry_var
+        )
+        self.verb_entry.grid(row=2, column=0, columnspan=6, pady=5)
+        self.verb_entry_var.trace_add('write', self.on_verb_entry_change)
 
     def _create_radio_buttons(self, parent, label_text, options, variable, row, column, columns=6):
         """
@@ -808,52 +831,3 @@ class VerbConjugationApp():
 
     def play_connacht_audio(self):
         play_connacht_audio(self)
-    #
-    # def play_ulster_audio(self):
-    #     self.play_audio('U')
-    #
-    # def play_munster_audio(self):
-    #     self.play_audio('M')
-    #
-    # def play_connacht_audio(self):
-    #     self.play_audio('C')
-    #
-    # def play_audio(self, dialect_code):
-    #     threading.Thread(target=self._play_audio_thread, args=(dialect_code,), daemon=True).start()
-    #
-    # def _play_audio_thread(self, dialect_code):
-    #     import requests
-    #     import urllib.parse
-    #     from playsound import playsound
-    #     import tempfile
-    #     import os
-    #
-    #     try:
-    #         verb = self.correct_verb
-    #         encoded_verb = urllib.parse.quote(verb)
-    #         if dialect_code == 'U':
-    #             url = f'https://www.teanglann.ie/CanU/{encoded_verb}.mp3'
-    #         elif dialect_code == 'M':
-    #             url = f'https://www.teanglann.ie/CanM/{encoded_verb}.mp3'
-    #         elif dialect_code == 'C':
-    #             url = f'https://www.teanglann.ie/CanC/{encoded_verb}.mp3'
-    #         else:
-    #             raise ValueError(f"Unknown dialect code: {dialect_code}")
-    #         # Download the mp3 file
-    #         response = requests.get(url)
-    #         if response.status_code == 200:
-    #             # Save to a temp file
-    #             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:
-    #                 temp_file.write(response.content)
-    #                 temp_file.flush()  # Ensure data is written
-    #                 temp_file_name = temp_file.name
-    #             # Play the audio file
-    #             playsound(temp_file_name)
-    #             # Remove the temp file after playing
-    #             os.remove(temp_file_name)
-    #         else:
-    #             self.root.after(0, messagebox.showerror, "Error", f"Audio file not found for '{verb}' in dialect '{dialect_code}'")
-    #     except Exception as e:
-    #         logging.error(f"Error playing audio: {e}")
-    #         # Since we're in a thread, need to use tkinter's thread-safe method to show messagebox
-    #         self.root.after(0, messagebox.showerror, "Error", f"An error occurred while playing audio: {e}")

@@ -3,17 +3,15 @@ import json
 import logging
 import os
 import random
-import tempfile
-import textwrap
-import threading
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 
+from app.audio_player import play_ulster_audio, play_munster_audio, play_connacht_audio
 from app.paradigm_display import display_paradigm
-from app.verb_selection import select_verbs
 from app.utils.definition_utility import edit_definition
 from app.utils.full_paradigm_utility import generate_full_paradigm
 from app.utils.load_verbs_utility import load_verbs
+from app.verb_selection import select_verbs
 from logging_config import configure_logging
 
 # Configure logging
@@ -803,50 +801,59 @@ class VerbConjugationApp():
             self.check_answer_button.config(state="disabled")
 
     def play_ulster_audio(self):
-        self.play_audio('U')
+        play_ulster_audio(self)
 
     def play_munster_audio(self):
-        self.play_audio('M')
+        play_munster_audio(self)
 
     def play_connacht_audio(self):
-        self.play_audio('C')
-
-    def play_audio(self, dialect_code):
-        threading.Thread(target=self._play_audio_thread, args=(dialect_code,), daemon=True).start()
-
-    def _play_audio_thread(self, dialect_code):
-        import requests
-        import urllib.parse
-        from playsound import playsound
-        import tempfile
-        import os
-
-        try:
-            verb = self.correct_verb
-            encoded_verb = urllib.parse.quote(verb)
-            if dialect_code == 'U':
-                url = f'https://www.teanglann.ie/CanU/{encoded_verb}.mp3'
-            elif dialect_code == 'M':
-                url = f'https://www.teanglann.ie/CanM/{encoded_verb}.mp3'
-            elif dialect_code == 'C':
-                url = f'https://www.teanglann.ie/CanC/{encoded_verb}.mp3'
-            else:
-                raise ValueError(f"Unknown dialect code: {dialect_code}")
-            # Download the mp3 file
-            response = requests.get(url)
-            if response.status_code == 200:
-                # Save to a temp file
-                with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:
-                    temp_file.write(response.content)
-                    temp_file.flush()  # Ensure data is written
-                    temp_file_name = temp_file.name
-                # Play the audio file
-                playsound(temp_file_name)
-                # Remove the temp file after playing
-                os.remove(temp_file_name)
-            else:
-                self.root.after(0, messagebox.showerror, "Error", f"Audio file not found for '{verb}' in dialect '{dialect_code}'")
-        except Exception as e:
-            logging.error(f"Error playing audio: {e}")
-            # Since we're in a thread, need to use tkinter's thread-safe method to show messagebox
-            self.root.after(0, messagebox.showerror, "Error", f"An error occurred while playing audio: {e}")
+        play_connacht_audio(self)
+    #
+    # def play_ulster_audio(self):
+    #     self.play_audio('U')
+    #
+    # def play_munster_audio(self):
+    #     self.play_audio('M')
+    #
+    # def play_connacht_audio(self):
+    #     self.play_audio('C')
+    #
+    # def play_audio(self, dialect_code):
+    #     threading.Thread(target=self._play_audio_thread, args=(dialect_code,), daemon=True).start()
+    #
+    # def _play_audio_thread(self, dialect_code):
+    #     import requests
+    #     import urllib.parse
+    #     from playsound import playsound
+    #     import tempfile
+    #     import os
+    #
+    #     try:
+    #         verb = self.correct_verb
+    #         encoded_verb = urllib.parse.quote(verb)
+    #         if dialect_code == 'U':
+    #             url = f'https://www.teanglann.ie/CanU/{encoded_verb}.mp3'
+    #         elif dialect_code == 'M':
+    #             url = f'https://www.teanglann.ie/CanM/{encoded_verb}.mp3'
+    #         elif dialect_code == 'C':
+    #             url = f'https://www.teanglann.ie/CanC/{encoded_verb}.mp3'
+    #         else:
+    #             raise ValueError(f"Unknown dialect code: {dialect_code}")
+    #         # Download the mp3 file
+    #         response = requests.get(url)
+    #         if response.status_code == 200:
+    #             # Save to a temp file
+    #             with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as temp_file:
+    #                 temp_file.write(response.content)
+    #                 temp_file.flush()  # Ensure data is written
+    #                 temp_file_name = temp_file.name
+    #             # Play the audio file
+    #             playsound(temp_file_name)
+    #             # Remove the temp file after playing
+    #             os.remove(temp_file_name)
+    #         else:
+    #             self.root.after(0, messagebox.showerror, "Error", f"Audio file not found for '{verb}' in dialect '{dialect_code}'")
+    #     except Exception as e:
+    #         logging.error(f"Error playing audio: {e}")
+    #         # Since we're in a thread, need to use tkinter's thread-safe method to show messagebox
+    #         self.root.after(0, messagebox.showerror, "Error", f"An error occurred while playing audio: {e}")

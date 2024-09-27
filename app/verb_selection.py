@@ -105,5 +105,16 @@ def select_verbs(root, verbs, verb_selection_vars, select_all_verbs, deselect_al
     search_var.trace_add('write', update_displayed_verbs)
     show_definitions_var.trace_add('write', update_displayed_verbs)
 
+    # Bind mouse wheel events to the canvas for scrolling
+    def on_mouse_wheel(event):
+        if event.num == 4 or event.delta > 0:
+            canvas.yview_scroll(-1, "units")
+        elif event.num == 5 or event.delta < 0:
+            canvas.yview_scroll(1, "units")
+
+    canvas.bind_all("<MouseWheel>", on_mouse_wheel)
+    canvas.bind_all("<Button-4>", on_mouse_wheel)
+    canvas.bind_all("<Button-5>", on_mouse_wheel)
+
     # Initially display all verbs
     update_displayed_verbs()
